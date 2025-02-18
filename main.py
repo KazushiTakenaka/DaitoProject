@@ -2,7 +2,7 @@ from utime import sleep
 # 独自のライブラリをインポート (Servo)
 from libs.ServoClass import Servo
 from libs.BuzzerClass import MelodyPlayer
-
+# test commit
 def main():
     """
     セットアップ
