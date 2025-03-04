@@ -2,8 +2,14 @@ from utime import sleep
 # 独自のライブラリをインポート (Servo)
 from libs.ServoClass import Servo
 from libs.BuzzerClass import MelodyPlayer
-
+# test commit
 def main():
+    """
+    メイン処理。
+
+    サーボモーターを制御して歩行動作を行い、開始時にメロディを再生する。
+    """
+
     """
     セットアップ
     """
@@ -11,15 +17,22 @@ def main():
     right_leg: Servo = Servo(3)  # 右足サーボモーターオブジェクトを生成
     left_foot: Servo = Servo(4)  # 左足首サーボモーターオブジェクトを生成
     right_foot: Servo = Servo(5)  # 右足首サーボモーターオブジェクトを生成
-
     home(left_leg, right_leg, left_foot, right_foot, first_flag=1)  # 初期位置
+    first_time:int = 0
+
     """
     メイン処理
     """
     while True:
+        if first_time == 0:
+            player: MelodyPlayer = MelodyPlayer()
+            player.happy()
+            first_time = 1
+
         """
         前進動作
         """
+        move(left_foot, right_foot, left_leg, right_leg, 1, 0.01)
         # for _ in range(5):
         #     move(left_foot, right_foot, left_leg, right_leg, 1, 0.01)
         # home(left_leg, right_leg, left_foot, right_foot)
@@ -34,16 +47,24 @@ def main():
         """
         かに歩き動作
         """
-        for _ in range(5):
-            side_step(left_foot, right_foot, left_leg, right_leg, 1, 0.2)  # 右方向への横歩き (1: 右, -1: 左)
-        home(left_leg, right_leg, left_foot, right_foot)
-        for _ in range(5):
-            side_step(left_foot, right_foot, left_leg, right_leg, -1, 0.2) # 左方向への横歩き
-        home(left_leg, right_leg, left_foot, right_foot)
+        # for _ in range(5):
+        #     side_step(left_foot, right_foot, left_leg, right_leg, 1, 0.2)  # 右方向への横歩き (1: 右, -1: 左)
+        # home(left_leg, right_leg, left_foot, right_foot)
+        # for _ in range(5):
+        #     side_step(left_foot, right_foot, left_leg, right_leg, -1, 0.2) # 左方向への横歩き
+        # home(left_leg, right_leg, left_foot, right_foot)
 
 def home(left_leg: Servo, right_leg: Servo, left_foot: Servo, right_foot: Servo, speed = 0.01, first_flag = 0):
     """
-    初期位置(90°)に戻す
+    サーボモーターを初期位置(90°)に戻す。
+
+    Args:
+        left_leg: 左足サーボモーターオブジェクト
+        right_leg: 右足サーボモーターオブジェクト
+        left_foot: 左足首サーボモーターオブジェクト
+        right_foot: 右足首サーボモーターオブジェクト
+        speed: サーボモーターの動作速度 (秒)
+        first_flag: 初回実行フラグ (1: 初回, 0: 通常)
     """
     # 起動時の初期位置動作
     if first_flag == 1:
@@ -83,7 +104,6 @@ def twin_servo_angle(servo_1: Servo , servo_2: Servo, end_angle: int, speed = 0.
     Args:
         servo_1: 1つ目のサーボモーターオブジェクト
         servo_2: 2つ目のサーボモーターオブジェクト
-        start_angle: 開始角度
         end_angle: 終了角度
         speed: 速度 (秒)
     """
@@ -188,7 +208,5 @@ def side_step(left_foot: Servo, right_foot: Servo, left_leg: Servo, right_leg: S
         right_foot.set_angle(right_foot.angle_val + angle1, speed)
         left_foot.set_angle(left_foot.angle_val - angle1, speed)
         right_foot.set_angle(right_foot.angle_val - angle1, speed)
-
-
 
 main()  # メイン関数を実行
