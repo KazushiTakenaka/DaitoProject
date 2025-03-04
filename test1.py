@@ -22,7 +22,7 @@ def main():
         """
         # for _ in range(5):
         #     move(left_foot, right_foot, left_leg, right_leg, 1, 0.01)
-        # home(left_leg, right_leg, left_foot, right_foot)
+        home(left_leg, right_leg, left_foot, right_foot)
 
         """
         後進動作
@@ -34,12 +34,12 @@ def main():
         """
         かに歩き動作
         """
-        for _ in range(5):
-            side_step(left_foot, right_foot, left_leg, right_leg, 1, 0.2)  # 右方向への横歩き (1: 右, -1: 左)
-        home(left_leg, right_leg, left_foot, right_foot)
-        for _ in range(5):
-            side_step(left_foot, right_foot, left_leg, right_leg, -1, 0.2) # 左方向への横歩き
-        home(left_leg, right_leg, left_foot, right_foot)
+        # for _ in range(5):
+        #     side_step(left_foot, right_foot, left_leg, right_leg, 1, 0.2)  # 右方向への横歩き (1: 右, -1: 左)
+        # home(left_leg, right_leg, left_foot, right_foot)
+        # for _ in range(5):
+        #     side_step(left_foot, right_foot, left_leg, right_leg, -1, 0.2) # 左方向への横歩き
+        # home(left_leg, right_leg, left_foot, right_foot)
 
 def home(left_leg: Servo, right_leg: Servo, left_foot: Servo, right_foot: Servo, speed = 0.01, first_flag = 0):
     """
