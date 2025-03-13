@@ -4,7 +4,7 @@ import utime
 class MelodyPlayer:
     """メロディを再生するクラス。"""
 
-    def __init__(self, pin_num: int = 15) -> None:
+    def __init__(self, pin_num: int = 1) -> None:
         """コンストラクタ。
 
         Args:

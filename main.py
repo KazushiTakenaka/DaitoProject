@@ -40,6 +40,7 @@ def main():
         """
         後進動作
         """
+        # move(left_foot, right_foot, left_leg, right_leg, -1, 0.01)
         # for _ in range(5):
         #     move(left_foot, right_foot, left_leg, right_leg, -1, 0.01)
         # home(left_leg, right_leg, left_foot, right_foot)
@@ -135,35 +136,40 @@ def move(left_foot: Servo, right_foot: Servo, left_leg: Servo, right_leg: Servo,
     """
     angle1: int = 30  # 足の角度変化量
     angle2: int = 0
+    angle3: int = 40
+    angle4: int = 0
     # 変更角度を整数に調整
     if not angle1 % 2:
         angle2 = round(angle1 / 2)  # 足首の角度変化量
+        angle4 = round(angle3 / 2)  # 足首の角度変化量
     elif angle1 % 2:
-        angle1 = angle1 +1
+        angle1 = angle1 + 1
+        angle3 = angle3 + 1  
         angle2 = round(angle1 / 2)  # 足首の角度変化量
+        angle4 = round(angle3 / 2)  # 足首の角度変化量
 
     # 前進動作
     if direction == 1:
         if left_foot.angle_val == 90 and right_foot.angle_val == 90 and left_leg.angle_val == 90 and right_leg.angle_val ==90:  # 初期動作
             twin_servo_angle(left_foot, right_foot, left_foot.angle_val + angle2, speed) # 足首を少し上げる
-            twin_servo_angle(left_leg, right_leg, right_leg.angle_val - angle2, speed) # 足を少し下げる
+            twin_servo_angle(left_leg, right_leg, right_leg.angle_val - angle4, speed) # 足を少し下げる
 
         # 歩行動作の繰り返し
         twin_servo_angle(left_foot, right_foot , left_foot.angle_val - angle1, speed) # 足首を下げる
-        twin_servo_angle(left_leg, right_leg , right_leg.angle_val + angle1, speed) # 足を上げる
+        twin_servo_angle(left_leg, right_leg , right_leg.angle_val + angle3, speed) # 足を上げる
         twin_servo_angle(left_foot, right_foot , left_foot.angle_val + angle1, speed) # 足首を上げる
-        twin_servo_angle(left_leg, right_leg , right_leg.angle_val - angle1, speed) # 足を下げる
+        twin_servo_angle(left_leg, right_leg , right_leg.angle_val - angle3, speed) # 足を下げる
     # 後進動作
     elif direction == -1:
         if left_foot.angle_val == 90 and right_foot.angle_val == 90 and left_leg.angle_val == 90 and right_leg.angle_val ==90:  # 最初の動作
             twin_servo_angle(left_foot, right_foot , left_foot.angle_val + angle2, speed) # 足首を少し上げる
-            twin_servo_angle(left_leg, right_leg , right_leg.angle_val + angle2, speed) # 足を少し下げる
+            twin_servo_angle(left_leg, right_leg , right_leg.angle_val + angle4, speed) # 足を少し下げる
 
         # 歩行動作の繰り返し
         twin_servo_angle(left_foot, right_foot , left_foot.angle_val - angle1, speed) # 足首を下げる
-        twin_servo_angle(left_leg, right_leg , right_leg.angle_val - angle1, speed) # 足を上げる
+        twin_servo_angle(left_leg, right_leg , right_leg.angle_val - angle3, speed) # 足を上げる
         twin_servo_angle(left_foot, right_foot , left_foot.angle_val + angle1, speed) # 足首を上げる
-        twin_servo_angle(left_leg, right_leg ,right_leg.angle_val + angle1, speed) # 足を下げる
+        twin_servo_angle(left_leg, right_leg ,right_leg.angle_val + angle3, speed) # 足を下げる
 
 def side_step(left_foot: Servo, right_foot: Servo, left_leg: Servo, right_leg: Servo, direction = 1, speed = 0.01):
     """
