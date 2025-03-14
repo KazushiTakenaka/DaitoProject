@@ -13,10 +13,10 @@ def main():
     """
     セットアップ
     """
-    left_leg: Servo = Servo(2)  # 左足サーボモーターオブジェクトを生成
-    right_leg: Servo = Servo(3)  # 右足サーボモーターオブジェクトを生成
-    left_foot: Servo = Servo(4)  # 左足首サーボモーターオブジェクトを生成
-    right_foot: Servo = Servo(5)  # 右足首サーボモーターオブジェクトを生成
+    left_leg: Servo = Servo(16)  # 左足サーボモーターオブジェクトを生成
+    right_leg: Servo = Servo(17)  # 右足サーボモーターオブジェクトを生成
+    left_foot: Servo = Servo(18)  # 左足首サーボモーターオブジェクトを生成
+    right_foot: Servo = Servo(19)  # 右足首サーボモーターオブジェクトを生成
     home(left_leg, right_leg, left_foot, right_foot, first_flag=1)  # 初期位置
     first_time:int = 0
 
@@ -25,7 +25,7 @@ def main():
     """
     while True:
         if first_time == 0:
-            player: MelodyPlayer = MelodyPlayer()
+            player: MelodyPlayer = MelodyPlayer(20)
             player.happy()
             first_time = 1
 
